@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Soolx"><title>前端面试题整理 · Soolx's Blog</title><meta name="description" content="前端面试题整理JScall, apply, bind区别当函数需要传递多个变量时, apply 可以接受一个数组作为参数输入, call 则是接受一系列的单独变量。
+Bind和call很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。
+bind返回对应函数, 便于稍后调用； ap"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title><a href="/">Soolx's Blog</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/soolx"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>PowerBy 2019 Soolx</span></a></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>前端面试题整理</a></h3></div><div class="post-content"><h1 id="前端面试题整理"><a href="#前端面试题整理" class="headerlink" title="前端面试题整理"></a>前端面试题整理</h1><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="call-apply-bind区别"><a href="#call-apply-bind区别" class="headerlink" title="call, apply, bind区别"></a>call, apply, bind区别</h3><p>当函数需要传递多个变量时, apply 可以接受一个数组作为参数输入, call 则是接受一系列的单独变量。</p>
+<p>Bind和call很相似，第一个参数是this的指向，从第二个参数开始是接收的参数列表。</p>
+<p>bind返回对应函数, 便于稍后调用； apply, call则是立即调用。</p>
+<h3 id="var是否可以省略"><a href="#var是否可以省略" class="headerlink" title="var是否可以省略"></a>var是否可以省略</h3><p>一般情况下，是可以省略var的，但有两点值得注意：</p>
+<ol>
+<li><code>var a=1</code>与<code>a=1</code>，这两条语句一般情况下作用是一样的。但是前者不能用delete删除。不过，绝大多数情况下，这种差异是可以忽略的。</li>
+<li>在函数内部，如果没有用<code>var</code>进行申明，则创建的变量是全局变量，而不是局部变量了。</li>
+</ol>
+<p>所以，建议变量申明加上<code>var</code>关键字。</p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>JavaScript引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a);</span><br><span class="line">var a =1;</span><br></pre></td></tr></table></figure>
+<p>以上语句并不会报错，只是提示<code>undefined</code>。实际运行过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">console.log(a);</span><br><span class="line">a =1;</span><br></pre></td></tr></table></figure>
+<p>表示变量a已声明，但还未赋值。但是变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(aa);</span><br><span class="line">aa =1;</span><br></pre></td></tr></table></figure>
+<p>以上代码将会报错:<code>ReferenceError: aa is not defined</code>。</p>
+<p>与普通变量一样，js里的function也可看做变量，也存在变量提升情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a();</span><br><span class="line"></span><br><span class="line">function a()&#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>表面上，上面代码好像在声明之前就调用了函数a。但是实际上，由于“变量提升”，函数a定义部分被提升到了代码头部，也就是在调用之前已经声明了。但是，如果采用赋值语句定义函数，JavaScript就会报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a();</span><br><span class="line"></span><br><span class="line">var a = function()&#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// TypeError: a is not a function</span><br></pre></td></tr></table></figure>
+<p>因为，实际运行过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a;</span><br><span class="line">a();</span><br><span class="line"></span><br><span class="line">a = function()&#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这时候a是个变量，并非function。</p>
+<h3 id="this的作用域"><a href="#this的作用域" class="headerlink" title="this的作用域"></a>this的作用域</h3><h4 id="普通函数和”this”"><a href="#普通函数和”this”" class="headerlink" title="普通函数和”this”"></a>普通函数和”this”</h4><p>this 关键字的价值完全取决于它的函数（或方法）是如何被调用的。this 可以是以下任何内容：</p>
+<ol>
+<li>新的对象</li>
+</ol>
+<p>如果函数使用<code>new</code>被调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const mySundae = new Sundae(&apos;Chocolate&apos;, [&apos;Sprinkles&apos;, &apos;Hot Fudge&apos;]);</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，Sundae 这个构造函数内的 this 的值是新的对象，因为它使用 new 被调用。</p>
+<ol start="2">
+<li>指定的对象</li>
+</ol>
+<p>如果函数使用 call/apply 被调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const result = obj1.printName.call(obj2);</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，printName() 中的 this 的值将指的是 obj2，因为 call() 的第一个参数明确设定 this 指代的是什么。</p>
+<ol start="3">
+<li>上下文对象</li>
+</ol>
+<p>如果函数是对象方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.teleport();</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，teleport() 中的 this 的值将指代 data。</p>
+<ol start="4">
+<li>全局对象或 undefined</li>
+</ol>
+<p>如果函数被调用时没有上下文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">teleport();</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，teleport() 中的 this 的值是全局对象，如果在严格模式下，是 undefined。</p>
+<h4 id="箭头函数和”this”"><a href="#箭头函数和”this”" class="headerlink" title="箭头函数和”this”"></a>箭头函数和”this”</h4><p>对于普通函数，this 的值基于函数如何被调用。对于箭头函数，this 的值基于函数周围的上下文。换句话说，箭头函数内的，this 的值与函数外面的 this 的值一样。</p>
+<p>我们先看一个普通函数中的 this 示例，再看一个箭头函数是如何使用 this 的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// constructor</span><br><span class="line">function IceCream() &#123;</span><br><span class="line">  this.scoops = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// adds scoop to ice cream</span><br><span class="line">IceCream.prototype.addScoop = function() &#123;</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    this.scoops++;</span><br><span class="line">    console.log(&apos;scoop added!&apos;);</span><br><span class="line">  &#125;, 500);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const dessert = new IceCream();</span><br><span class="line">dessert.addScoop();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Prints: scoop added!</p>
+</blockquote>
+<p>运行上述代码后，你会认为半毫秒之后，dessert.scoops 会是1。但并非这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(dessert.scoops);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Prints: 0</p>
+</blockquote>
+<p>能说说原因吗？</p>
+<p>传递给 setTimeout() 的函数被调用时没用到 new、call() 或 apply()，也没用到上下文对象。意味着函数内的 this 的值是全局对象，不是 dessert 对象。实际上发生的情况是，创建了新的 scoops 变量（默认值为 undefined），然后递增（undefined + 1 结果为 NaN）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(scoops);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Prints: NaN</p>
+</blockquote>
+<p>解决这个问题的方法之一是使用闭包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// constructor</span><br><span class="line">function IceCream() &#123;</span><br><span class="line">  this.scoops = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// adds scoop to ice cream</span><br><span class="line">IceCream.prototype.addScoop = function() &#123;</span><br><span class="line">  const cone = this; // sets `this` to the `cone` variable</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    cone.scoops++; // references the `cone` variable</span><br><span class="line">    console.log(&apos;scoop added!&apos;);</span><br><span class="line">  &#125;, 0.5);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const dessert = new IceCream();</span><br><span class="line">dessert.addScoop();</span><br></pre></td></tr></table></figure>
+<p>上述代码将可行，因为它没有在函数内使用 this，而是将 cone 变量设为 this，然后当函数被调用时查找 cone 变量。这样可行，因为使用了函数外面的 this 值。如果现在查看甜点中的勺子数量，正确值将为 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(dessert.scoops);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Prints: 1</p>
+</blockquote>
+<p>这正是箭头函数的作用，我们将传递给 setTimeout() 的函数替换为箭头函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// constructor</span><br><span class="line">function IceCream() &#123;</span><br><span class="line">  this.scoops = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// adds scoop to ice cream</span><br><span class="line">IceCream.prototype.addScoop = function() &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123; // an arrow function is passed to setTimeout</span><br><span class="line">    this.scoops++;</span><br><span class="line">    console.log(&apos;scoop added!&apos;);</span><br><span class="line">  &#125;, 0.5);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const dessert = new IceCream();</span><br><span class="line">dessert.addScoop();</span><br></pre></td></tr></table></figure>
+<p>因为箭头函数从周围上下文继承了 this 值，所以这段代码可行！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(dessert.scoops);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Prints: 1</p>
+</blockquote>
+<p>当 addScoop() 被调用时，addScoop() 中的 this 的值指的是 dessert。因为箭头函数被传递给 setTimeout()，它使用周围上下文判断它里面的 this 指的是什么。因为箭头函数外面的 this 指的是 dessert，所以箭头函数里面的 this 的值也将是 dessert。</p>
+<p>如果我们将 addScoop() 方法改为箭头函数，你认为会发生什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// constructor</span><br><span class="line">function IceCream() &#123;</span><br><span class="line">    this.scoops = 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// adds scoop to ice cream</span><br><span class="line">IceCream.prototype.addScoop = () =&gt; &#123; // addScoop is now an arrow function</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    this.scoops++;</span><br><span class="line">    console.log(&apos;scoop added!&apos;);</span><br><span class="line">  &#125;, 0.5);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const dessert = new IceCream();</span><br><span class="line">dessert.addScoop();</span><br></pre></td></tr></table></figure>
+<p>这段代码因为同一原因而不起作用，即箭头函数从周围上下文中继承了 this 值。在 addScoop() 方法外面，this 的值是全局对象。因此如果 addScoop() 是箭头函数，addScoop() 中的 this 的值是全局对象。这样的话，传递给 setTimeout() 的函数中的 this 的值也设为了该全局对象！</p>
+<h3 id="ES6新特性"><a href="#ES6新特性" class="headerlink" title="ES6新特性"></a>ES6新特性</h3><ul>
+<li>Let and Const</li>
+<li>模板字面量</li>
+<li>结构</li>
+<li>对象字面量简写法</li>
+<li>迭代 For…of循环</li>
+<li>展开…运算符</li>
+<li>…剩余参数</li>
+<li>箭头函数</li>
+<li>默认函数参数</li>
+<li>默认值和解构</li>
+<li>类</li>
+<li>super and extends</li>
+<li>Symbol</li>
+<li>Set</li>
+<li>WeakSet</li>
+<li>Map</li>
+<li>WeakMap</li>
+<li>Promise</li>
+<li>Proxy</li>
+<li>生成器和迭代器</li>
+<li>Polyfill</li>
+<li>转译 Babel</li>
+</ul>
+<h3 id="对象的拷贝"><a href="#对象的拷贝" class="headerlink" title="对象的拷贝"></a>对象的拷贝</h3><ul>
+<li><p>浅拷贝: 以赋值的形式拷贝引用对象，仍指向同一个地址，<strong>修改时原对象也会受到影响</strong></p>
+<ul>
+<li><code>Object.assign</code></li>
+<li>展开运算符(…)</li>
+</ul>
+</li>
+<li><p>深拷贝: 完全拷贝一个新对象，<strong>修改时原对象不再受到任何影响</strong></p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(obj))</span><br></pre></td></tr></table></figure>
+<p>: 性能最快 </p>
+<ul>
+<li>具有循环引用的对象时，报错</li>
+<li>当值为函数、<code>undefined</code>、或<code>symbol</code>时，无法拷贝</li>
+</ul>
+</li>
+<li><p>递归进行逐一赋值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码的复用"><a href="#代码的复用" class="headerlink" title="代码的复用"></a>代码的复用</h3><p>当你发现任何代码开始写第二遍时，就要开始考虑如何复用。一般有以下的方式:</p>
+<ul>
+<li>函数封装</li>
+<li>继承</li>
+<li>复制<code>extend</code></li>
+<li>混入<code>mixin</code></li>
+<li>借用<code>apply/call</code></li>
+</ul>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p><strong>原型链是由原型对象组成</strong>，每个对象都有 <code>__proto__</code> 属性，指向了创建该对象的构造函数的原型，<code>__proto__</code> 将对象连接起来组成了原型链。是一个用来<strong>实现继承和共享属性</strong>的有限的对象链。</p>
+<ul>
+<li><strong>属性查找机制</strong>: 当查找对象的属性时，如果实例对象自身不存在该属性，则沿着原型链往上一级查找，找到时则输出，不存在时，则继续沿着原型链往上一级查找，直至最顶级的原型对象<code>Object.prototype</code>，如还是没找到，则输出<code>undefined</code>；</li>
+<li><strong>属性修改机制</strong>: 只会修改实例对象本身的属性，如果不存在，则进行添加该属性，如果需要修改原型的属性时，则可以用: <code>b.prototype.x = 2</code>；但是这样会造成所有继承于该对象的实例的属性发生改变。</li>
+</ul>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包属于一种特殊的作用域，称为 <strong>静态作用域</strong>。它的定义可以理解为: <strong>父函数被销毁</strong> 的情况下，返回出的子函数的<code>[[scope]]</code>中仍然保留着父级的单变量对象和作用域链，因此可以继续访问到父级的变量对象，这样的函数称为闭包。</p>
+<ul>
+<li>闭包会产生一个很经典的问题:<ul>
+<li>多个子函数的<code>[[scope]]</code>都是同时指向父级，是完全共享的。因此当父级的变量对象被修改时，所有子函数都受到影响。</li>
+</ul>
+</li>
+<li>解决:<ul>
+<li>变量可以通过 <strong>函数参数的形式</strong> 传入，避免使用默认的<code>[[scope]]</code>向上查找</li>
+<li>使用<code>setTimeout</code>包裹，通过第三个参数传入</li>
+<li>使用 <strong>块级作用域</strong>，让变量成为自己上下文的属性，避免共享</li>
+</ul>
+</li>
+</ul>
+<h3 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h3><p>防抖与节流函数是一种最常用的 <strong>高频触发优化方式</strong>，能对性能有较大的帮助。</p>
+<ul>
+<li><strong>防抖 (debounce)</strong>: 将多次高频操作优化为只在最后一次执行，通常使用的场景是：用户输入，只需再输入完成后做一次输入校验即可。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait, immediate</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="keyword">let</span> context = <span class="keyword">this</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (immediate &amp;&amp; !timer) &#123;</span><br><span class="line">            fn.apply(context, args)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (timer) clearTimeout(timer)</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(context, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>节流(throttle)</strong>: 每隔一段时间后执行一次，也就是降低频率，将高频操作优化成低频操作，通常使用场景: 滚动条事件 或者 resize 事件，通常每隔 100~500 ms执行一次即可。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait, immediate</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">let</span> callNow = immediate</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> context = <span class="keyword">this</span>,</span><br><span class="line">            args = <span class="built_in">arguments</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (callNow) &#123;</span><br><span class="line">            fn.apply(context, args)</span><br><span class="line">            callNow = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!timer) &#123;</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                fn.apply(context, args)</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><h3 id="跨标签页通讯"><a href="#跨标签页通讯" class="headerlink" title="跨标签页通讯"></a>跨标签页通讯</h3><p>不同标签页间的通讯，本质原理就是去运用一些可以 <strong>共享的中间介质</strong>，因此比较常用的有以下方法:</p>
+<ul>
+<li>通过父页面<code>window.open()</code>和子页面<code>postMessage</code><ul>
+<li>异步下，通过 <code>window.open(&#39;about: blank&#39;)</code> 和 <code>tab.location.href = &#39;*&#39;</code></li>
+</ul>
+</li>
+<li>设置同域下共享的<code>localStorage</code>与监听<code>window.onstorage</code><ul>
+<li>重复写入相同的值无法触发</li>
+<li>会受到浏览器隐身模式等的限制</li>
+</ul>
+</li>
+<li>设置共享<code>cookie</code>与不断轮询脏检查(<code>setInterval</code>)</li>
+<li>借助服务端或者中间层实现</li>
+</ul>
+<h3 id="Web-Worker"><a href="#Web-Worker" class="headerlink" title="Web Worker"></a>Web Worker</h3><h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><ul>
+<li>意外的<strong>全局变量</strong>: 无法被回收</li>
+<li><strong>定时器</strong>: 未被正确关闭，导致所引用的外部变量无法被释放</li>
+<li><strong>事件监听</strong>: 没有正确销毁 (低版本浏览器可能出现)</li>
+<li><strong>闭包</strong>: 会导致父级中的变量无法被释放</li>
+<li><strong>dom 引用</strong>: dom 元素被删除时，内存中的引用未被正确清空</li>
+</ul>
+<p>可用 chrome 中的 timeline 进行内存标记，可视化查看内存的变化情况，找出异常点。</p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="Web-Socket"><a href="#Web-Socket" class="headerlink" title="Web Socket"></a>Web Socket</h3><h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><ul>
+<li>JSONP: 利用<code>&lt;script&gt;</code>标签不受跨域限制的特点，缺点是只能支持 get 请求</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function jsonp(url, jsonpCallback, success) &#123;</span><br><span class="line">  const script = document.createElement(&apos;script&apos;)</span><br><span class="line">  script.src = url</span><br><span class="line">  script.async = true</span><br><span class="line">  script.type = &apos;text/javascript&apos;</span><br><span class="line">  window[jsonpCallback] = function(data) &#123;</span><br><span class="line">    success &amp;&amp; success(data)</span><br><span class="line">  &#125;</span><br><span class="line">  document.body.appendChild(script)</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置 CORS: Access-Control-Allow-Origin：*</li>
+<li>postMessage</li>
+</ul>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><ul>
+<li>XSS攻击: 注入恶意代码<ul>
+<li>cookie 设置 httpOnly</li>
+<li>转义页面上的输入内容和输出内容</li>
+</ul>
+</li>
+<li>CSRF: 跨站请求伪造，防护:<ul>
+<li>get 不修改数据</li>
+<li>不被第三方网站访问到用户的 cookie</li>
+<li>设置白名单，不被第三方网站请求</li>
+<li>请求校验</li>
+</ul>
+</li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (arr.length&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> arr;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">var</span> pivotIndex = <span class="number">0</span>,</span><br><span class="line">        pivort = arr.splice(pivortIndex, <span class="number">1</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> left = [],</span><br><span class="line">        right = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>, length = arr.length; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; pivort) &#123;</span><br><span class="line">            left.push(arr[i]);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i] &gt; = pivort) &#123;</span><br><span class="line">            right.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> quickSort(left).concat([pivort], quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="深克隆"><a href="#深克隆" class="headerlink" title="深克隆"></a>深克隆</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">test</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(test)) &#123;</span><br><span class="line">        <span class="keyword">var</span> arr = [];</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, length = test.length; i &lt; length; i++) &#123;</span><br><span class="line">               arr.push(clone(arr[i]));</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (typeOf test === <span class="string">"object"</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> j <span class="keyword">in</span> test) &#123;</span><br><span class="line">               obj[j] = clone(test[j]);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> test;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考资料</p>
+<p><a href="https://juejin.im/post/5c64d15d6fb9a049d37f9c20" target="_blank" rel="noopener">https://juejin.im/post/5c64d15d6fb9a049d37f9c20</a></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.soolx.top/2019/03/31/interview-questions/,Soolx's Blog,前端面试题整理,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2019/03/31/unit-testing/" title="单元测试" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
