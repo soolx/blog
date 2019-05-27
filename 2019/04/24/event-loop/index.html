@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Soolx"><title>事件循环笔记 · Soolx's Blog</title><meta name="description" content="事件循环笔记JavaScript为什么单线程？JS作为浏览器的脚本语言，需要处理用户交互和操作DOM，这决定它只能是一个单线程语言。因为假定JS是多线程的话，两个线程同时操作DOM会导致冲突。HTML5提出了Web Worker标准，允许JS创建多线程，但是也有很多限制，比如子线程完全受主线程控制，"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title><a href="/">Soolx's Blog</a></h3></div></div><ul class="social-links"><li><a href="http://github.com/soolx"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>PowerBy 2019 Soolx</span></a></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>事件循环笔记</a></h3></div><div class="post-content"><h1 id="事件循环笔记"><a href="#事件循环笔记" class="headerlink" title="事件循环笔记"></a>事件循环笔记</h1><h2 id="JavaScript为什么单线程？"><a href="#JavaScript为什么单线程？" class="headerlink" title="JavaScript为什么单线程？"></a>JavaScript为什么单线程？</h2><p>JS作为浏览器的脚本语言，需要处理用户交互和操作DOM，这决定它只能是一个单线程语言。因为假定JS是多线程的话，两个线程同时操作DOM会导致冲突。HTML5提出了Web Worker标准，允许JS创建多线程，但是也有很多限制，比如子线程完全受主线程控制，不能操作DOM。JS单线程的本质并没有改变。</p>
+<h2 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h2><p>任务分为两种：</p>
+<ul>
+<li>同步任务</li>
+<li>异步任务</li>
+</ul>
+<p>同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
+<p>具体来说，异步执行的运行机制如下。（同步执行也是如此，因为它可以被视为没有异步任务的异步执行。）</p>
+<blockquote>
+<p>（1）所有同步任务都在主线程上执行，形成一个<a href="http://www.ruanyifeng.com/blog/2013/11/stack.html" target="_blank" rel="noopener">执行栈</a>（execution context stack）。</p>
+<p>（2）主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</p>
+<p>（3）一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</p>
+<p>（4）主线程不断重复上面的第三步。</p>
+</blockquote>
+<h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><p>主线程从”任务队列”中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为Event Loop（事件循环）。</p>
+<p>当javascript代码执行的时候会将不同的变量存于内存中的不同位置：堆（heap）和栈（stack）中来加以区分，<code>heap</code>中一般存储我们的变量，<code>stack</code>一般存储函数或者方法。<code>stack</code>叫做执行栈，我们的方法依次会在这里执行。<code>执行栈事件先进后出，任务队列先进先出。</code>web apis则是代表一些异步事件，而callback queue即事件队列。</p>
+<p>对照图片我们解释一下整个事件循环机制</p>
+<ul>
+<li>执行栈执行主线程任务，当有<code>操作dom</code>，<code>ajax交互</code>，<code>使用定时器</code>异步操作的时候，这些任务会被移入到 callback queue 任务队列中</li>
+<li>当主线程任务执行完毕为空时，会读取callback queue队列中的函数，进入主线程执行</li>
+<li>上述过程会不断重复，也就是常说的Event Loop(事件循环)。</li>
+</ul>
+<p>不同的异步任务被分为两类：微任务（micro task）和宏任务（macro task）。</p>
+<p>在一个事件循环中，异步事件返回结果后会被放到一个任务队列中。然而，根据这个异步事件的类型，这个事件实际上会被对应的宏任务队列或者微任务队列中去，当执行栈为空的时候，主线程会首先查看微任务中的事件，如果微任务不是空的那么执行微任务中的事件，如果没有在宏任务中取出最前面的一个事件。把对应的回调加入当前执行栈…如此反复，进入循环。</p>
+<ul>
+<li>macro-task(宏任务) <ul>
+<li>setTimeout</li>
+<li>setInterval</li>
+<li>setImmediate</li>
+</ul>
+</li>
+<li>micro-task(微任务) <ul>
+<li>Promise</li>
+<li>process.nextTick</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/" target="_blank" rel="noopener">ruanyifeng Blog</a></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-04-24</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.soolx.top/2019/04/24/event-loop/,Soolx's Blog,事件循环笔记,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2019/04/24/arraybuffer/" title="ArrayBuffer" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2019/04/24/create-ui-library/" title="创建一个组件库" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
