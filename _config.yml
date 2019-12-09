@@ -32,6 +32,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - README.md
+  - .travis.yml
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -87,6 +88,7 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
+  - .travis.yml
 exclude:
 ignore:
 
