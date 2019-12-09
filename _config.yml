@@ -4,7 +4,7 @@
 
 # Site
 title: Journey
-subtitle: ~只要你在原地转个圈，就可以收获360度的风景~
+subtitle: Soolx's Blog
 description: ''
 keywords:
 author: Soolx
@@ -96,6 +96,24 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+theme_config:
+  menu:
+    home: / || home
+    about: /about/ || user
+    #tags: /tags/ || tags
+    #categories: /categories/ || th
+    archives: /archives/ || archive
+    #schedule: /schedule/ || calendar
+    #sitemap: /sitemap.xml || sitemap
+    #commonweal: /404/ || heartbeat
+  social:
+    GitHub: https://github.com/soolx || github
+  scheme: Pisces
+  github_banner:
+    enable: true
+    permalink: https://github.com/soolx
+    title: Follow me on GitHub
+ 
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
