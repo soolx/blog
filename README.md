@@ -1,2 +1,3 @@
-# Blog
-[![Build status](https://ci.appveyor.com/api/projects/status/7pxv5a68jf4f92xm?svg=true)](https://ci.appveyor.com/project/soolx/blog-source)
+# Soolx's Blog
+
+[![Build Status](https://travis-ci.com/soolx/blog.svg?branch=master)](https://travis-ci.com/soolx/blog)
