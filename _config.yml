@@ -96,8 +96,10 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: anatole
+avatar: /images/dog.jpg
 theme_config:
   github: https://github.com/soolx
+  
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
