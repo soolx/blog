@@ -4,8 +4,8 @@
 
 # Site
 title: Journey
-subtitle: Soolx's Blog
-description: ''
+# subtitle: Soolx's Blog
+description: Soolx's Blog
 keywords:
 author: Soolx
 language: 
@@ -95,25 +95,9 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: anatole
 theme_config:
-  menu:
-    home: / || home
-    about: /about/ || user
-    #tags: /tags/ || tags
-    #categories: /categories/ || th
-    archives: /archives/ || archive
-    #schedule: /schedule/ || calendar
-    #sitemap: /sitemap.xml || sitemap
-    #commonweal: /404/ || heartbeat
-  social:
-    GitHub: https://github.com/soolx || github
-  scheme: Pisces
-  github_banner:
-    enable: true
-    permalink: https://github.com/soolx
-    title: Follow me on GitHub
- 
+  github: https://github.com/soolx
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
