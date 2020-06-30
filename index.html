@@ -7,7 +7,7 @@
 不了解哪些功能是用户高频使用的，哪些是无人问津的
 有些功能的稳定性较差，需要进行异常记录，方便排...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-04-28</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2020/03/31/websocket/">WebSocket实现设计</a></h3></div><div class="post-content"><p>WebSocket实现设计WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。
 有时会遇到服务器需要主动推动消息的需求，或者有频繁的少量消息需要交换。因为HTTP请求的头部可能很长，这种场景下，会带来很多的带宽损耗。
-WebSocket 协议，能更好的节省服务器资源和带宽...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/04/24/event-loop/">事件循环笔记</a></h3></div><div class="post-content"><p>事件循环笔记JavaScript为什么单线程？JS作为浏览器的脚本语言，需要处理用户交互和操作DOM，这决定它只能是一个单线程语言。因为假定JS是多线程的话，两个线程同时操作DOM会导致冲突。HTML5提出了Web Worker标准，允许JS创建多线程，但是也有很多限制，比如子线程完全受主线程控制，不能操作DOM...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-04-24</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/04/24/create-ui-library/">创建一个组件库</a></h3></div><div class="post-content"><p>创建一个组件库组件库一般分为两个主要部分，组件实现和文档示例。
+WebSocket 协议，能更好的节省服务器资源和带宽...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/04/24/event-loop/">事件循环笔记</a></h3></div><div class="post-content"><p>事件循环笔记JavaScript为什么单线程？JS作为浏览器的脚本语言，需要处理用户交互和操作DOM，这决定它只能是一个单线程语言。因为假定JS是多线程的话，两个线程同时操作DOM会导致冲突。HTML5提出了Web Worker标准，允许JS创建多线程，但是也有很多限制，比如子线程完全受主线程控制，不能操作DOM...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-04-24</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/04/24/sentry/">Sentry使用</a></h3></div><div class="post-content"><p>Sentry使用介绍Sentry 是一个开源的实时错误追踪系统，可以帮助开发者实时监控并修复异常问题。它主要专注于持续集成、提高效率并且提升用户体验。Sentry 分为服务端和客户端 SDK，前者可以直接使用它家提供的在线服务，也可以本地自行搭建；后者提供了对多种主流语言和框架的支持。目前公司的项目也都在逐步应用...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-04-24</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/04/24/create-ui-library/">创建一个组件库</a></h3></div><div class="post-content"><p>创建一个组件库组件库一般分为两个主要部分，组件实现和文档示例。
 目前考虑基于umi-library实现一个组件库。
 umi-library介绍umi-library是一个基于rollup和docz实现的一个组件库工具，同时它也支持babel打包。
 特性
@@ -27,13 +27,4 @@ bind返回对应函数, 便于稍后调用； apply, ca...</p></div><div class="
 React常用的单元测试工具Jest+Enzyme
 Jest使用安装用yarn安装jest:yarn add --dev jest
 或者npm:
-npm install --save-dev j...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2019/02/28/react-hooks/">react-hooks</a></h3></div><div class="post-content"><p>2019-02-soolx-React Hooks笔记
-React HooksReact-Hooks于React 16.8版本正式发布。它为不编写类的情况下，为组件实现state管理和其他React功能提供了可能。
-
-Hook的优势
-可以方便的在组件中复用逻辑
-可以更加灵活的拆分组件
-
-
-Hook 规则
-只在顶层...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-02-28</span><i class="fa fa-tag"></i></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/2/">下一页</a></li></ul></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+npm install --save-dev j...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2019-03-31</span><i class="fa fa-tag"></i></div></div></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/page/2/">下一页</a></li></ul></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
