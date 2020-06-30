@@ -124,3 +124,15 @@ const config = {
 * release 版本名称
 * urlPrefix 资源前缀
 
+##### 发布前删除map文件
+使用CleanWebpackPlugin
+```
+const config = {
+  plugins: [
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanAfterEveryBuildPatterns: ['./*.map'],
+    }),
+  ],
+};
+```
